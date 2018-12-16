@@ -3,10 +3,11 @@ from tensorflow.python.keras import layers
 
 model = tf.keras.Sequential([
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
-    layers.Conv2D(32, (3, 3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
     layers.Dropout(0.25),
     layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D(pool_size=(2, 2)),
+    layers.Dropout(0.25),
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
     layers.Dropout(0.25),
@@ -17,7 +18,7 @@ model = tf.keras.Sequential([
 
 num_classes = 10
 
-model.compile(optimizer=tf.train.RMSPropOptimizer(0.001, decay=1e-6), loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.train.RMSPropOptimizer(0.0001, decay=1e-6), loss='categorical_crossentropy', metrics=['accuracy'])
 
 (trainX, trainY), (testX, testY) = tf.keras.datasets.cifar10.load_data()
 
